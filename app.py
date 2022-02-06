@@ -39,7 +39,6 @@ def callback():
     # get request body as text
     body = request.get_data(as_text=True)
     app.logger.info("Request body: " + body)
-
     # handle webhook body
     try:
         handler.handle(body, signature)
@@ -51,6 +50,8 @@ def callback():
 
 @handler.add(MessageEvent, message=TextMessage)
 def message_text(event):
+    user_id = event.source.user_id
+    app.logger.info(f"user_id: {user_id}")
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=f"echo: {event.message.text}")
