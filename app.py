@@ -52,6 +52,7 @@ def callback():
 def message_text(event):
     user_id = event.source.user_id
     app.logger.info(f"user_id: {user_id}")
+    print("user_id: ", user_id)
     line_bot_api.reply_message(
         event.reply_token,
         TextSendMessage(text=f"echo: {event.message.text}")
